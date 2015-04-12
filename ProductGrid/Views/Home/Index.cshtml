@@ -26,6 +26,7 @@
     selectedRowStyle: "selected",
     columns: grid.Columns(
     //Create the ActionLink to enable linking to other views, such as Details or Edit
+    //More info at https://msdn.microsoft.com/en-us/magazine/hh288075.aspx
     grid.Column("Name", format: @<text>@Html.ActionLink((string)item.Name, "Edit", "Home", new {id=item.ProductId}, null)</text>),
     grid.Column("Description", "Description", style: "description"),
     grid.Column("Quantity", "Quantity")
