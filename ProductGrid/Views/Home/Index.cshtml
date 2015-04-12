@@ -1,0 +1,32 @@
+﻿@model IEnumerable<ProductGrid.Models.Product>
+
+@{
+    ViewBag.Title = "Index";
+    //WebGrid displays data on a web page using an HTML table element.
+    //In this instance, I've provided the constructor with a couple of arguments: Model is obviously the data object,
+    //ajaxUpdateContainerId looks in the DOM for the Id container to make dynamic Ajax updates, defaultSort indicates the default
+    //column on which to begin filtering
+    //more info at https://msdn.microsoft.com/en-us/library/system.web.helpers.webgrid(v=vs.111).aspx
+    WebGrid grid = new WebGrid(Model, ajaxUpdateContainerId: "productGrid", defaultSort: "Name");
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<div id="productGrid">
+    @*Returns the HTML markup that is used to render the WebGrid instance and using the specified paging options.
+    more information at https://msdn.microsoft.com/en-us/library/system.web.helpers.webgrid.gethtml(v=vs.111).aspx*@
+    @grid.GetHtml(tableStyle: "grid",
+    headerStyle: "header",
+    footerStyle: "footer",
+    alternatingRowStyle: "alternate",
+    selectedRowStyle: "selected",
+    columns: grid.Columns(
+        grid.Column("Name", "Name"),
+        grid.Column("Description", "Description", style: "description"),
+        grid.Column("Quantity", "Quantity")
+        ))
+</div>
