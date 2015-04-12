@@ -18,15 +18,16 @@
 
 <div id="productGrid">
     @*Returns the HTML markup that is used to render the WebGrid instance and using the specified paging options.
-    more information at https://msdn.microsoft.com/en-us/library/system.web.helpers.webgrid.gethtml(v=vs.111).aspx*@
+        more information at https://msdn.microsoft.com/en-us/library/system.web.helpers.webgrid.gethtml(v=vs.111).aspx*@
     @grid.GetHtml(tableStyle: "grid",
     headerStyle: "header",
     footerStyle: "footer",
     alternatingRowStyle: "alternate",
     selectedRowStyle: "selected",
     columns: grid.Columns(
-        grid.Column("Name", "Name"),
-        grid.Column("Description", "Description", style: "description"),
-        grid.Column("Quantity", "Quantity")
-        ))
+    //Create the ActionLink to enable linking to other views, such as Details or Edit
+    grid.Column("Name", format: @<text>@Html.ActionLink((string)item.Name, "Edit", "Home", new {id=item.ProductId}, null)</text>),
+    grid.Column("Description", "Description", style: "description"),
+    grid.Column("Quantity", "Quantity")
+    ))
 </div>
